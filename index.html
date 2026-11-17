@@ -28,8 +28,13 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:16px}
 <header><div class="eyebrow">PRIVATE • BROWSER-BASED • GTA CONTENT</div><h1>🎮 GTA Clip Studio</h1><div class="sub">Turn your own long gameplay recordings into vertical Shorts, Reels and TikToks.</div></header>
 
 <section class="card">
-<h2>1. Import your stream recording</h2>
-<label for="file">Choose a video saved on your iPhone</label>
+<h2>1. Import your stream</h2>
+<label for="streamUrl">Paste a direct video-file URL (MP4/WebM)</label>
+<input id="streamUrl" type="url" inputmode="url" placeholder="https://example.com/my-gameplay.mp4" autocomplete="url">
+<button id="loadUrl">Import video from URL</button>
+<p id="urlStatus" class="muted">Direct video-file links may work if the host allows browser access (CORS). A normal Twitch, YouTube or Kick page link is not a direct video file.</p>
+<div class="notice">Platform links: You can paste a Twitch, YouTube or Kick VOD link above to check it, but this free browser-only site cannot download or extract the video from those pages. Use the platform's permitted export/download option for a VOD you own or have permission to edit, then upload that file below. This does not bypass platform restrictions.</div>
+<label for="file">Or choose a video saved on your iPhone</label>
 <input id="file" type="file" accept="video/*">
 <video id="preview" controls playsinline></video>
 <div class="row">
@@ -37,12 +42,11 @@ footer{text-align:center;color:var(--muted);font-size:11px;padding:16px}
  <div><small>File size</small><div id="filesize">—</div></div>
  <div><small>Output</small><div>9:16 MP4</div></div>
 </div>
-<p class="muted">For Twitch, YouTube or Kick: use a recording/VOD file you own or are authorised to edit, then select it here. Pasting a stream URL does not bypass platform access restrictions.</p>
 </section>
 
 <section class="card">
 <h2>2. Select a highlight</h2>
-<div class="notice">This first version is a real video trimmer, not an automatic AI highlight detector. Watch your recording, find a clutch, funny reaction, chase, mission moment or unexpected event, then mark its start and end.</div>
+<div class="notice">This version is a manual video trimmer, not an automatic AI highlight detector. Watch your recording, find a clutch, funny reaction, chase, mission moment or unexpected event, then mark its start and end.</div>
 <label for="title">Clip title</label><input id="title" placeholder="GTA moment — insane escape">
 <div class="grid">
  <div><label for="start">Start time (seconds)</label><input id="start" type="number" min="0" step="0.1" placeholder="12.0"></div>
