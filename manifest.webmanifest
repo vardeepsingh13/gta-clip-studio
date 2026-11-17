@@ -1,0 +1,9 @@
+{
+  "name": "GTA Clip Studio",
+  "short_name": "GTA Clips",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b0d12",
+  "theme_color": "#0b0d12",
+  "description": "Private browser-based GTA gameplay short-form video trimmer"
+}

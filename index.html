@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0d12">
+<title>GTA Clip Studio</title>
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{color-scheme:dark;--bg:#0b0d12;--panel:#171b24;--line:#2b3241;--muted:#a6afc0;--purple:#a78bfa;--green:#86efac}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#1c1a31 0,#0b0d12 55%);color:#f5f6fb;font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:env(safe-area-inset-top) 14px calc(24px + env(safe-area-inset-bottom));max-width:850px;margin:auto}
+header{padding:22px 4px 14px}h1{font-size:27px;margin:4px 0}h2{font-size:17px;margin:0 0 12px}.sub,.muted{color:var(--muted);line-height:1.45}.eyebrow{font-size:11px;letter-spacing:.14em;color:var(--green);font-weight:800}
+.card{background:rgba(23,27,36,.95);border:1px solid var(--line);border-radius:18px;padding:15px;margin:12px 0;box-shadow:0 10px 30px #0002}
+input,select,button{font:inherit;border-radius:11px;padding:12px;border:1px solid var(--line);background:#0e121a;color:#fff;width:100%;min-width:0}
+label{display:block;color:var(--muted);font-size:12px;margin:11px 0 6px}
+button{background:var(--purple);color:#171322;font-weight:750;border:0;cursor:pointer;margin-top:8px}button.secondary{background:#303747;color:#fff}button:disabled{opacity:.45}
+.row{display:flex;gap:8px}.row>*{flex:1}.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+video{width:100%;max-height:360px;background:#000;border-radius:12px;margin-top:10px}
+.pill{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:6px 9px;font-size:11px;color:var(--muted);margin:3px 3px 3px 0}
+.notice{border:1px solid #514276;background:#241f34;color:#e8e1ff;padding:11px;border-radius:12px;font-size:12px;line-height:1.45}
+.cliprow{border-top:1px solid var(--line);padding:12px 0}.cliprow:first-child{border-top:0}.cliprow strong{display:block;margin-bottom:7px}
+small{color:var(--muted)}.progress{height:7px;background:#303747;border-radius:99px;overflow:hidden;margin-top:10px}.progress>div{height:100%;width:0;background:var(--purple)}
+footer{text-align:center;color:var(--muted);font-size:11px;padding:16px}
+@media(max-width:420px){.row.stack{flex-direction:column}.grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header><div class="eyebrow">PRIVATE • BROWSER-BASED • GTA CONTENT</div><h1>🎮 GTA Clip Studio</h1><div class="sub">Turn your own long gameplay recordings into vertical Shorts, Reels and TikToks.</div></header>
+
+<section class="card">
+<h2>1. Import your stream recording</h2>
+<label for="file">Choose a video saved on your iPhone</label>
+<input id="file" type="file" accept="video/*">
+<video id="preview" controls playsinline></video>
+<div class="row">
+ <div><small>Duration</small><div id="duration">—</div></div>
+ <div><small>File size</small><div id="filesize">—</div></div>
+ <div><small>Output</small><div>9:16 MP4</div></div>
+</div>
+<p class="muted">For Twitch, YouTube or Kick: use a recording/VOD file you own or are authorised to edit, then select it here. Pasting a stream URL does not bypass platform access restrictions.</p>
+</section>
+
+<section class="card">
+<h2>2. Select a highlight</h2>
+<div class="notice">This first version is a real video trimmer, not an automatic AI highlight detector. Watch your recording, find a clutch, funny reaction, chase, mission moment or unexpected event, then mark its start and end.</div>
+<label for="title">Clip title</label><input id="title" placeholder="GTA moment — insane escape">
+<div class="grid">
+ <div><label for="start">Start time (seconds)</label><input id="start" type="number" min="0" step="0.1" placeholder="12.0"></div>
+ <div><label for="end">End time (seconds)</label><input id="end" type="number" min="0" step="0.1" placeholder="42.0"></div>
+</div>
+<div class="row"><button class="secondary" id="useCurrentStart">Use player time as start</button><button class="secondary" id="useCurrentEnd">Use player time as end</button></div>
+<label for="layout">Vertical framing</label>
+<select id="layout"><option value="center">Centre crop (9:16)</option><option value="top">Upper crop (9:16)</option><option value="bottom">Lower crop (9:16)</option></select>
+<label for="caption">Caption text (optional)</label><input id="caption" placeholder="WAIT FOR THE END 💀">
+<button id="add">＋ Add clip to export queue</button>
+</section>
+
+<section class="card">
+<h2>3. Export your short-form clips</h2>
+<div class="muted">Clips are cut and converted in your browser. Your video is not uploaded to a processing server.</div>
+<div id="queue"><p class="muted">No clips queued yet.</p></div>
+<div class="row"><button id="loadEngine">Load free video engine</button><button id="exportAll" disabled>Export queued clips</button></div>
+<div class="progress"><div id="bar"></div></div><small id="status">Video engine not loaded.</small>
+<div id="downloads"></div>
+</section>
+<section class="card">
+<h2>4. GTA short-form ideas</h2>
+<span class="pill">Unexpected moments</span><span class="pill">Funny NPC behaviour</span><span class="pill">Close escapes</span><span class="pill">Mission twists</span><span class="pill">Vehicle stunts</span><span class="pill">Easter eggs</span><span class="pill">Epic fails</span>
+<p class="muted">Try a strong opening, keep one clear moment per clip, and add a short title that accurately describes what happens.</p>
+</section>
+<footer>GTA Clip Studio · Personal-use prototype · Processing happens on your device</footer>
+<script type="module" src="app.js"></script>
+</body></html>
